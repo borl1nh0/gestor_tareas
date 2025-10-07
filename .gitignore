@@ -20,3 +20,9 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+#Venv
+.venv
+#BaseDato
+db.sqlite3
+#pychache
+__pycache__
