@@ -1,10 +1,11 @@
 from django.db import models
+from django.utils import timezone
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=150)
     correo = models.CharField(max_length=200, unique=True)
     contrasena = models.CharField(max_length=200)
-    fecha_registro = models.DateTimeField()
+    fecha_registro = models.DateTimeField(default=timezone.now)
     
     def __str__(self): 
         return self.nombre
@@ -57,14 +58,14 @@ class AsignacionTarea(models.Model):
     usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE, related_name='asignaciones')
     tarea = models.ForeignKey('Tarea', on_delete=models.CASCADE, related_name='asignaciones')
     observaciones = models.TextField()
-    fecha_asignacion = models.DateTimeField()
+    fecha_asignacion = models.DateTimeField(default=timezone.now)
     
     def __str__(self): 
         return f"{self.usuario} -> {self.tarea}"
 
 class Comentario(models.Model):
     contenido = models.TextField()
-    fecha_comentario = models.DateTimeField()
+    fecha_comentario = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey('Usuario', on_delete=models.CASCADE, related_name='comentarios')
     tarea = models.ForeignKey('Tarea', on_delete=models.CASCADE, related_name='comentarios')
     
